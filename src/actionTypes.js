@@ -1,0 +1,9 @@
+export const ADD_ROLE = "ADD_ROLE";
+export const DELETE_ROLE = "DELETE_ROLE";
+export const SAVE_ROLE = "SAVE_ROLE";
+export const ADD_HABIT = "ADD_HABIT";
+export const DELETE_HABIT = "DELETE_HABIT";
+export const SAVE_HABIT = "SAVE_HABIT";
+export const UPDATE_FREQ = "UPDATE_FREQ";
+export const ADD_GOAL = "ADD_GOAL";
+export const DELETE_GOAL = "DELETE_GOAL";

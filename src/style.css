@@ -1,0 +1,25 @@
+body{
+    background-color:rgb(195, 195, 209);
+}
+
+.role{
+    border:10px solid red;
+    color:red;
+    height:100px;
+
+}
+
+.roleDescription{
+    display:block;
+    height: 50px;
+    width:80%;
+}
+
+.deleteButton{
+    float:right;
+}
+
+.habit{
+    color:blue;
+    border:5px solid blue;
+}
