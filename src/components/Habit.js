@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux';
 import {DELETE_ROLE,SAVE_ROLE,ADD_HABIT,DELETE_HABIT,SAVE_HABIT,ADD_GOAL} from '../actionTypes';
 import SelectFreq from './selectFreq'
+import Review from './Review';
 
 
 //This links the redux store, the "state" object, to a key that will be accessible as a prop in the component
@@ -32,7 +33,9 @@ constructor(props){
 super(props);
     this.state = {
 title:props.title,
-description:props.description
+description:props.description,
+reviewActive:true,
+reviewClass:"reviewOn",
     }
 }
 
@@ -62,6 +65,17 @@ this.setState({title:event.target.value})
         this.setState({description:event.target.value})
             }
 
+review = () =>{
+if(this.state.reviewActive===false){
+    this.setState({reviewClass:"reviewOn"}) 
+    this.setState({reviewActive:true});
+}else{
+    this.setState({reviewClass:"reviewOff"}) 
+    this.setState({reviewActive:false});
+
+}
+console.log(this.state.reviewClass);
+}
 
     render() {
 
@@ -72,7 +86,9 @@ this.setState({title:event.target.value})
             <button className="deleteButton" onClick={this.delete}>delete</button>
             <textarea value={this.state.description} onChange={this.updateDescription} className="roleDescription"></textarea>
             <button onClick={this.save}>save</button>
+            <button className="reviewButton" onClick={this.review}>Review</button>
             <SelectFreq roleId={this.props.roleId} habitId={this.props.habitId}/>
+            <div className={this.state.reviewClass}><Review habitId={this.props.habitId} roleId={this.props.roleId}/></div>
         </div>
        
 }

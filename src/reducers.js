@@ -29,7 +29,7 @@ function rootReducer(state = defaultState, action) {
         case ADD_HABIT:
             roleIndex = newState.roles.findIndex((role) => role.id == action.payload.roleId);
             newState.roles[roleIndex].habits = _.concat(newState.roles[roleIndex].habits, action.payload.newHabit);
-            newState.roles[roleIndex].habitsIndex = action.payload.currentIndex;
+            newState.roles[roleIndex].habitIndex = action.payload.currentIndex;
 
 
         case DELETE_HABIT:

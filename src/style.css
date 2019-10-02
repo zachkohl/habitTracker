@@ -5,7 +5,8 @@ body{
 .role{
     border:10px solid red;
     color:red;
-    height:100px;
+    min-height:100px;
+    min-width:90vw;
 
 }
 
@@ -22,4 +23,17 @@ body{
 .habit{
     color:blue;
     border:5px solid blue;
+
+}
+
+.reviewButton{
+    float:right;
+}
+
+.reviewOff{
+    display:none;
+}
+
+.reviewOn{
+    display:block;
 }

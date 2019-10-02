@@ -82,7 +82,6 @@ class Role extends Component {
 
 
     render() {
-console.log(this.props.habits)
         const ListItems = this.props.habits.map((habit) =>
             <Habit key={habit.id} habitId={habit.id} roleId={this.props.id} />);
 
