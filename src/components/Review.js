@@ -56,32 +56,43 @@ daysInMonth = (parameter) =>{
         let blanks = [];
 
         for (let i=0;i<this.firstDayOfMonth(); i++){
-            blanks.push(<td className="calendar-day-empty">{""}</td>)
+            let y = i +50;
+            blanks.push(<td key={y} className="calendar-day-empty">{""}</td>)
         }
+     
+        let daysInMonthLeft = [];
+        for (let d=1; d<=this.daysInMonth(this.dateObject);d++){
+            daysInMonthLeft.push(<td key={d} className="calendar-day">{d}</td>)
+           
+        }
+   
+        let totalSlots = [...blanks, ...daysInMonthLeft];
     
-        let daysInMonth = [];
-        for (let d=1; d<=this.daysInMonth;d++){
-            daysInMonth.push(<td key={d} className="calendar-day">{d}</td>)
-        }
-
-        let totalSlots = [...blanks, ...daysInMonth];
-
         let rows = [];
         let cells = [];
 
         totalSlots.forEach((row, i) =>{
+         
             if (i % 7 !==0){
                 cells.push(row);
             }else{
                 rows.push(cells);
+                cells = [];
+                cells.push(row);
             }
             if( i ===totalSlots.length -1){
                 rows.push(cells);
             }
         })
+        
+        
+        let daysInMonthRows = rows.map((d,i) => {
+            let x = i+100;
+        return <tr key={x}>{d}</tr>;
+        });
 
         return <div>
-            <table><thead><tr>{weekdayShortName}</tr></thead></table>
+            <table><thead><tr>{weekdayShortName}</tr></thead><tbody>{daysInMonthRows}</tbody></table>
         </div>
        
 }
