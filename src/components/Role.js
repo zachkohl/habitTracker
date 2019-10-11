@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { DELETE_ROLE, SAVE_ROLE, ADD_HABIT, ADD_GOAL } from '../actionTypes';
 import Habit from './Habit';
+import Goal from './Goal';
+import moment from 'moment';
 
 
 //This links the redux store, the "state" object, to a key that will be accessible as a prop in the component
@@ -14,7 +16,8 @@ const mapStateToProps = function (state, ownProps) {
     const description = role.description;
     const id = role.id;
     const habitIndex = role.habitIndex;
-    return { title, habits, goals, description, id, habitIndex };
+    const goalIndex = role.goalIndex;
+    return { title, habits, goals, description, id, habitIndex, goalIndex };
 };
 
 function getRoleById(state, id) {
@@ -73,19 +76,39 @@ class Role extends Component {
             description: '',
             frequency: '',
             samples: [],
-            samplesIndex:-1}
+            samplesIndex: -1,
+            date: moment().format('YYYY-MM-DD')
+        }
 
-        const payload = { currentIndex: currentIndex, newHabit: newHabit,roleId:this.props.id }
-
+        const payload = { currentIndex: currentIndex, newHabit: newHabit, roleId: this.props.id }
         this.props.addHabit(payload);
+    }
+
+    addGoal = () => {
+        const newName = window.prompt('please enter name of new goal');
+        if (newName === null) {
+            return
+        }
+
+        let currentIndex = this.props.goalIndex + 1;
+        const newGoal = {
+            id: currentIndex,
+            title: newName,
+            description: ''
+        }
+        const payload = { currentIndex: currentIndex, newGoal: newGoal, roleId: this.props.id }
+        this.props.addGoal(payload);
+
+
     }
 
 
     render() {
-        const ListItems = this.props.habits.map((habit) =>
+        const ListHabits = this.props.habits.map((habit) =>
             <Habit key={habit.id} habitId={habit.id} roleId={this.props.id} />);
 
-
+        const ListGoals = this.props.goals.map((goal) =>
+            <Goal key={goal.id} goalId={goal.id} roleId={this.props.id} />);
 
 
 
@@ -96,8 +119,9 @@ class Role extends Component {
             <textarea value={this.state.description} onChange={this.updateDescription} className="roleDescription"></textarea>
             <button onClick={this.saveRole}>save</button>
             <button onClick={this.addHabit}>add habit</button>
-            <button>add goal</button>
-            <div>{ListItems}</div>
+            <button onClick={this.addGoal}>add goal</button>
+            <div>{ListHabits}</div>
+            <div>{ListGoals}</div>
         </div>
 
     }
@@ -112,8 +136,11 @@ function mapDispatchToProps(dispatch) {
         saveRole: (payload) => {
             dispatch({ type: SAVE_ROLE, payload: payload })
         },
-        addHabit:(payload)=>{
+        addHabit: (payload) => {
             dispatch({ type: ADD_HABIT, payload: payload })
+        },
+        addGoal: (payload) => {
+            dispatch({ type: ADD_GOAL, payload: payload })
         }
     })
 }

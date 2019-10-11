@@ -26,6 +26,7 @@ Habit prototype
     frequency:'',
     samples:[],
     samplesIndex,
+    date:moment().format('YYYY-MM-DD'),
 
 }
 

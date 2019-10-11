@@ -22,10 +22,10 @@ import rootReducer from './reducers';
   
   
 let stroredState = loadState();
-console.log(stroredState);
+
   let store = createStore(rootReducer,stroredState,applyMiddleware(thunk))
 
-  store.subscribe(() => console.log(store.getState()))
+//   store.subscribe(() => console.log(store.getState()))
 
 //   store.dispatch({ type: 'INCREMENT' })
 
@@ -39,7 +39,6 @@ function loadState(){
 //get the state
 try{
 let stringJSON = localStorage.getItem('state')
-console.log(stringJSON)
 if(stringJSON===null){
     return defaultState;
 }
